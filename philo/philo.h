@@ -6,7 +6,7 @@
 /*   By: sabakar- <sabakar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 22:16:20 by sabakar-          #+#    #+#             */
-/*   Updated: 2024/10/25 22:56:36 by sabakar-         ###   ########.fr       */
+/*   Updated: 2024/10/26 01:07:01 by sabakar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+# define MAX_PHILOS 200
 
 typedef struct s_args
 {
@@ -50,6 +52,11 @@ typedef struct s_philo
 }					t_philo;
 
 int					ft_atoi(const char *str);
-int is_valid(char **args);
+int					is_valid(char **args);
+int					is_arg_valid(char **args);
+void    init_philo(t_philo *philo, t_args *philos);
+void    init_threads(pthread_mutex_t les_threads, int philo_num);
+void    init_args(t_args *philos, t_philo *philo, pthread_mutex_t *les_threads, char **av);
+size_t	get_current_time(void);
 
 #endif
