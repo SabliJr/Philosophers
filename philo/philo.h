@@ -54,9 +54,10 @@ typedef struct s_philo
 int					ft_atoi(const char *str);
 int					is_valid(char **args);
 int					is_arg_valid(char **args);
-void    init_philo(t_philo *philo, t_args *philos);
-void    init_threads(pthread_mutex_t les_threads, int philo_num);
-void    init_args(t_args *philos, t_philo *philo, pthread_mutex_t *les_threads, char **av);
-size_t	get_current_time(void);
+void				init_philo(t_philo *philo, t_args *philos);
+void				init_threads(pthread_mutex_t *les_threads, int philo_num);
+void				init_args(t_args *philos, t_philo *philo,
+						pthread_mutex_t *les_threads, char **av);
+size_t				get_current_time(void);
 
 #endif

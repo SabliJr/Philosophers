@@ -12,10 +12,10 @@
 
 #include "./philo.h"
 
-int is_arg_valid(char **args, int ac)
+int is_arg_valid(char **args)
 {
-    if ((ft_atoi(args[1]) > MAX_PHILOS) || ft_atoi(args[1]))
-        return ("Invaild Philosophers number\n", 0);
+    if ((ft_atoi(args[1]) > MAX_PHILOS) || ft_atoi(args[1]) <= 0)
+        return (write(2, "Invaild Philosophers number\n", 27), 0);
     if (ft_atoi(args[2]) <= 0)
         return (write(2, "Invalid time to die\n", 21), 0);
     if (ft_atoi(args[3]) <= 0)
@@ -31,7 +31,6 @@ int is_arg_valid(char **args, int ac)
 
 int	main(int ac, char *av[])
 {
-	int		x;
 	t_args	args[MAX_PHILOS];
 	t_philo	philo;
     pthread_mutex_t les_threads[MAX_PHILOS];
@@ -47,7 +46,7 @@ int	main(int ac, char *av[])
         
 	init_philo(&philo, args);
     init_threads(les_threads, ft_atoi(av[1]));
-	init_args(args, philo, les_threads, av);
+	init_args(args, &philo, les_threads, av);
     
 	return (0);
 }
