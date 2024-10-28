@@ -12,39 +12,46 @@
 
 #include "./philo.h"
 
-void    init_philo(t_philo *philo, t_args *philos)
+void	init_philo(t_philo *philo, t_args *philos)
 {
-    philo->dead_flag = 0;
-    philo->philos_args = philos;
-    thread_mutex_init(philo->dead_lock, NULL);
-    thread_mutex_init(philo->meal_lock, NULL);
-    thread_mutex_init(philo->write_lock, NULL);
+	philo->dead_flag = 0;
+	philo->philos_args = philos;
+	pthread_mutex_init(&philo->meal_lock, NULL);
+	pthread_mutex_init(&philo->dead_lock, NULL);
+	pthread_mutex_init(&philo->write_lock, NULL);
 }
 
-void    init_input(t_args *args, char **av)
+void	init_input(t_args *args, char **av)
 {
-    args->num_of_philos = av[1];
-    args->time_to_die = av[2];
-    args->time_to_eat = av[3];
-    args->time_to_sleep = av[4];
-    if (av[5])
-        args->num_times_to_eat = av[5];
-    else
-        args->num_times_to_eat = -1;
+	args->num_of_philos = ft_atoi(av[1]);
+	args->time_to_die = ft_atoi(av[2]);
+	args->time_to_eat = ft_atoi(av[3]);
+	args->time_to_sleep = ft_atoi(av[4]);
+	if (av[5])
+		args->num_times_to_eat = ft_atoi(av[5]);
+	else
+		args->num_times_to_eat = -1;
 }
 
-void    init_threads(pthread_mutex_t *les_threads, int philo_num)
+void	init_threads(pthread_mutex_t *les_threads, int philo_num)
 {
-    int k;
+	int	k;
+	int	x;
 
-    k = -1;
-    while (++k < philo_num)
-        pthread_mutex_init(&les_threads[k], NULL);
+	k = -1;
+	x = 0;
+	while (++k < philo_num)
+	{
+		pthread_mutex_init(&les_threads[k], NULL);
+		x++;
+	}
+	printf("The {x} is {%d}", x);
 }
 
-void    init_args(t_args *args, t_philo *philo, pthread_mutex_t *les_threads, char **av)
+void	init_args(t_args *args, t_philo *philo, pthread_mutex_t *les_threads,
+		char **av)
 {
-    int	i;
+	int	i;
 
 	i = -1;
 	while (++i < ft_atoi(av[1]))
