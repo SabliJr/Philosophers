@@ -11,29 +11,31 @@ NAME=philo
 PROGRAMME_FILES = ./ft_atoi.c \
 				  ./init.c \
 				  ./la_utils.c \
-				  ./main.c
+				  ./main.c \
+				  ./les_threads.c \
+				  ./routines.c \
 
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -g3
+CFLAGS = -Werror -Wall -Wextra -g3 -O3 -pthread
 
 OBJS = ${PROGRAMME_FILES:.c=.o}
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-$(NAME): ${OBJS}
+$(NAME): $(OBJS)
 		 ${CC} ${CFLAGS} ${OBJS} -o $(NAME)
-		echo $(GREEN) "[COMPILED SUCCESSFLLY]" $(EOC)
-
+		 echo $(GREEN) "COMPILED SUCCESSFLLY..." $(EOC)
+	
 all: $(NAME)
 
 clean: 
 	   rm -f $(OBJS)
-	   echo $(YELLOW) "[🧹Cleaning OBJS...🧹]" $(EOC)
+	   echo $(YELLOW) "Cleaning OBJS...🧹" $(EOC)
 
 fclean:
 		rm -f $(NAME)
 		rm -f $(OBJS)
-		echo $(ORANGE) "[🧹Cleaning NAME & OBJS...🧹]" $(EOC)
+		echo $(ORANGE) "Cleaning NAME & OBJS...🧹" $(EOC)
 
 re: fclean all
 .PHONY: all clean fclean re

@@ -31,7 +31,7 @@ int	ft_is_digit(char *sr)
 	return (1);
 }
 
-int is_valid(char **args)
+int ft_is_valid(char **args)
 {
     int x;
 
@@ -40,7 +40,7 @@ int is_valid(char **args)
     {
         if (!ft_is_digit(args[x]))
         {
-            write(2, "Invalid input!", 15);
+            write(2, "Invalid input!\n", 15);
             return (0);
         }
     }
@@ -52,13 +52,13 @@ int	ft_usleep(size_t milliseconds)
 {
 	size_t	start;
 
-	start = get_current_time();
-	while ((get_current_time() - start) < milliseconds)
+	start = ft_get_current_time();
+	while ((ft_get_current_time() - start) < milliseconds)
 		usleep(500);
 	return (0);
 }
 
-size_t	get_current_time(void)
+size_t	ft_get_current_time(void)
 {
 	struct timeval	time;
 
