@@ -52,12 +52,19 @@ typedef struct s_philo
 }					t_philo;
 
 int					ft_atoi(const char *str);
-int					is_valid(char **args);
-int					is_arg_valid(char **args);
-void				init_philo(t_philo *philo, t_args *philos);
-void				init_threads(pthread_mutex_t *les_threads, int philo_num);
-void				init_args(t_args *philos, t_philo *philo,
+int					ft_is_valid(char **args);
+int					ft_is_arg_valid(char **args);
+void				ft_init_philo(t_philo *philo, t_args *philos);
+void				ft_init_forks(pthread_mutex_t *les_threads, int philo_num);
+void				ft_init_args(t_args *philos, t_philo *philo,
 						pthread_mutex_t *les_threads, char **av);
-size_t				get_current_time(void);
+size_t				ft_get_current_time(void);
+void				ft_create_threads(t_philo *philo,
+						pthread_mutex_t *les_forks);
+int					ft_usleep(size_t milliseconds);
+void				ft_sleep(void);
+void				ft_think(void);
+void				ft_eat(void);
+void     ft_destroy_all(char *message, t_philo *philo, pthread_mutex_t *les_forks);
 
 #endif

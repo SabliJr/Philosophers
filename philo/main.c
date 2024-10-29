@@ -12,7 +12,7 @@
 
 #include "./philo.h"
 
-int is_arg_valid(char **args)
+int ft_is_arg_valid(char **args)
 {
     if ((ft_atoi(args[1]) > MAX_PHILOS) || ft_atoi(args[1]) <= 0)
         return (write(2, "Invaild Philosophers number\n", 27), 0);
@@ -33,20 +33,21 @@ int	main(int ac, char *av[])
 {
 	t_args	args[MAX_PHILOS];
 	t_philo	philo;
-    pthread_mutex_t les_threads[MAX_PHILOS];
+    pthread_mutex_t les_forks[MAX_PHILOS];
 
 	if (ac < 5 || ac > 6)
 		return (printf("You have more than or less of the required args\n"), 1);
         
-	if (!is_valid(av))
+	if (!ft_is_valid(av))
 		return (1);
         
-	if (!is_arg_valid(av))
+	if (!ft_is_arg_valid(av))
 		return (1);
         
-	init_philo(&philo, args);
-    init_threads(les_threads, ft_atoi(av[1]));
-	init_args(args, &philo, les_threads, av);
+	ft_init_philo(&philo, args);
+    ft_init_forks(les_forks, ft_atoi(av[1]));
+	ft_init_args(args, &philo, les_forks, av);
+    ft_create_threads(&philo, les_forks);
     
 	return (0);
 }
