@@ -28,7 +28,10 @@ void	ft_init_input(t_args *args, char **av)
 	args->time_to_eat = ft_atoi(av[3]);
 	args->time_to_sleep = ft_atoi(av[4]);
 	if (av[5])
+	{
+		printf("Times to eat: %d\n", ft_atoi(av[5]));
 		args->num_times_to_eat = ft_atoi(av[5]);
+	}
 	else
 		args->num_times_to_eat = -1;
 }
@@ -71,4 +74,18 @@ void	ft_init_args(t_args *args, t_philo *philo, pthread_mutex_t *les_forks,
 		else
 			args[i].r_fork = &les_forks[i - 1];
 	}
+}
+
+void	ft_print_mesg(char *msg, t_args *philos_args, int philo_id)
+{
+	size_t	time;
+	char *mgs;
+
+	pthread_mutex_lock(philos_args->write_lock);
+	time = ft_get_current_time() - philos_args->start_time;
+	mgs = "Is eating";
+	if (!ft_dead_loop(philos_args))
+		printf("%zu %d %s\n", time, philo_id, msg);
+	// printf("%syellow\n", KYEL);
+	pthread_mutex_unlock(philos_args->write_lock);
 }
