@@ -14,6 +14,7 @@ PROGRAMME_FILES = ./ft_atoi.c \
 				  ./main.c \
 				  ./les_threads.c \
 				  ./routines.c \
+				  ./ft_monitor.c
 
 CC = cc
 CFLAGS = -Werror -Wall -Wextra -g3 -O3 -pthread

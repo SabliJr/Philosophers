@@ -48,6 +48,6 @@ int	main(int ac, char *av[])
     ft_init_forks(les_forks, ft_atoi(av[1]));
 	ft_init_args(args, &philo, les_forks, av);
     ft_create_threads(&philo, les_forks);
-    
+    ft_destory_all(NULL, &philo, les_forks);
 	return (0);
 }

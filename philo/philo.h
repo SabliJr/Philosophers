@@ -20,6 +20,14 @@
 # include <unistd.h>
 
 # define MAX_PHILOS 200
+#define KNRM  "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KYEL  "\x1B[33m"
+#define KBLU  "\x1B[34m"
+#define KMAG  "\x1B[35m"
+#define KCYN  "\x1B[36m"
+#define KWHT  "\x1B[37m"
 
 typedef struct s_args
 {
@@ -59,12 +67,17 @@ void				ft_init_forks(pthread_mutex_t *les_threads, int philo_num);
 void				ft_init_args(t_args *philos, t_philo *philo,
 						pthread_mutex_t *les_threads, char **av);
 size_t				ft_get_current_time(void);
-void				ft_create_threads(t_philo *philo,
+int					ft_create_threads(t_philo *philo,
 						pthread_mutex_t *les_forks);
 int					ft_usleep(size_t milliseconds);
-void				ft_sleep(void);
-void				ft_think(void);
-void				ft_eat(void);
-void     ft_destroy_all(char *message, t_philo *philo, pthread_mutex_t *les_forks);
+void				ft_sleep(t_args *philos_args);
+void				ft_think(t_args *philos_args);
+void				ft_eat(t_args *philos_args);
+void				ft_destory_all(char *msg, t_philo *philo,
+						pthread_mutex_t *les_forks);
+void				*ft_monitor(void *philo_ptr);
+void				ft_print_mesg(char *msg, t_args *philos_args, int philo_id);
+int					ft_dead_loop(t_args *philo_args);
+size_t				ft_strlen(char *sr);
 
 #endif
