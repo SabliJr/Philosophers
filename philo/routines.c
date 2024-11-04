@@ -69,7 +69,7 @@ void	ft_destory_all(char *msg, t_philo *philo, pthread_mutex_t *les_forks)
 
 size_t	ft_strlen(char *sr)
 {
-	size_t x;
+	size_t	x;
 
 	x = 0;
 	while (sr[x])

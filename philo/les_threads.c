@@ -17,13 +17,12 @@ void	*ft_philo_routine(void *philo_ptr);
 
 int	ft_create_threads(t_philo *philo, pthread_mutex_t *les_forks)
 {
-	int	z;
+	int			z;
 	pthread_t	observer;
 
 	z = -1;
 	if (pthread_create(&observer, NULL, &ft_monitor, philo->philos_args) != 0)
 		ft_destory_all("There was an err creating thread!", philo, les_forks);
-
 	while (++z < philo->philos_args[0].num_of_philos)
 	{
 		if (pthread_create(&philo->philos_args[z].thread, NULL,
@@ -32,7 +31,6 @@ int	ft_create_threads(t_philo *philo, pthread_mutex_t *les_forks)
 				les_forks);
 	}
 	z = -1;
-
 	if (pthread_join(observer, NULL) != 0)
 		ft_destory_all("There was an err joining threads\n", philo, les_forks);
 	while (++z < philo->philos_args[0].num_of_philos)
@@ -41,7 +39,6 @@ int	ft_create_threads(t_philo *philo, pthread_mutex_t *les_forks)
 			ft_destory_all("Thre was an err joining threads!", philo,
 				les_forks);
 	}
-
 	return (0);
 }
 
