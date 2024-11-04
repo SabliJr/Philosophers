@@ -53,20 +53,16 @@ int	ft_is_all_ate(t_args *philo_args)
 	int	k;
 	int	finished_eating;
 
-	x = 0;
+	x = -1;
 	finished_eating = 0;
 	if (philo_args->num_times_to_eat == -1)
 		return (0);
-	while (x < philo_args[0].num_of_philos)
+	while (++x < philo_args[0].num_of_philos)
 	{
 		pthread_mutex_lock(philo_args[x].meal_lock);
 		if (philo_args[x].meals_eaten >= philo_args[x].num_times_to_eat)
-		{
-			// printf("The philo finished eating:-> %d\n", philo_args[x].id);
 			finished_eating++;
-		}
 		pthread_mutex_unlock(philo_args[x].meal_lock);
-		x++;
 	}
 	k = finished_eating * philo_args[0].num_times_to_eat;
 	if (finished_eating == philo_args[0].num_of_philos
@@ -74,20 +70,9 @@ int	ft_is_all_ate(t_args *philo_args)
 			&& (k == philo_args[0].num_of_philos
 				* philo_args[0].num_times_to_eat)))
 	{
-		printf("All the philos finished eating\n");
-		pthread_mutex_lock(philo_args[0].dead_lock);
-		*philo_args->dead = 1;
-		pthread_mutex_unlock(philo_args[0].dead_lock);
-		return (1);
+		(pthread_mutex_lock(philo_args[0].dead_lock), *philo_args->dead = 1);
+		return (pthread_mutex_unlock(philo_args[0].dead_lock), 1);
 	}
-	// if (finished_eating == philo_args[0].num_of_philos)
-	// {
-	// 	printf("The K is -> %d\n", k);
-	// 	pthread_mutex_lock(philo_args[0].dead_lock);
-	// 	*philo_args->dead = 1;
-	// 	pthread_mutex_unlock(philo_args[0].dead_lock);
-	// 	return (1);
-	// }
 	return (0);
 }
 

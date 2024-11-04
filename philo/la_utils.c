@@ -19,7 +19,7 @@ int	ft_check_num(char c)
 
 int	ft_is_digit(char *sr)
 {
-	int x;
+	int	x;
 
 	x = -1;
 	while (sr[++x])
@@ -27,25 +27,23 @@ int	ft_is_digit(char *sr)
 		if (!ft_check_num(sr[x]))
 			return (0);
 	}
-
 	return (1);
 }
 
-int ft_is_valid(char **args)
+int	ft_is_valid(char **args)
 {
-    int x;
+	int	x;
 
-     x = 0;
-    while (args[++x])
-    {
-        if (!ft_is_digit(args[x]))
-        {
-            write(2, "Invalid input!\n", 15);
-            return (0);
-        }
-    }
-
-    return (1);
+	x = 0;
+	while (args[++x])
+	{
+		if (!ft_is_digit(args[x]))
+		{
+			write(2, "Invalid input!\n", 15);
+			return (0);
+		}
+	}
+	return (1);
 }
 
 int	ft_usleep(size_t milliseconds)
